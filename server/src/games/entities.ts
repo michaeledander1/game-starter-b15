@@ -1,7 +1,7 @@
 import { BaseEntity, PrimaryGeneratedColumn, Column, Entity, Index, OneToMany, ManyToOne, BeforeInsert } from 'typeorm'
 import User from '../users/entity'
 
-export type Symbol = 'x' | 'o' | 'c' | 'a'
+export type Symbol = 'x' | 'o' | 'c' | 'a' | '-' | 'X' | 'O'
 export type Row = [ Symbol | null, Symbol | null, Symbol | null ]
 export type Board = [ Row, Row, Row, Row, Row ]
 
