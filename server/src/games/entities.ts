@@ -79,4 +79,7 @@ export class Player extends BaseEntity {
 
   @Column('char', {length: 1})
   symbol: Symbol
+
+  @Column('int', {default: 0})
+  cupsclicked: number
 }

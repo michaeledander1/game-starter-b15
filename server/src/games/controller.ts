@@ -4,7 +4,7 @@ import {
 } from 'routing-controllers'
 import User from '../users/entity'
 import { Game, Player, Board } from './entities'
-import {IsBoard, isValidTransition, calculateWinner, finished} from './logic'
+import {IsBoard, isValidTransition, calculateWinner, /*finished*/} from './logic'
 import { Validate } from 'class-validator'
 import {io} from '../index'
 
@@ -93,14 +93,14 @@ export default class GameController {
       throw new BadRequestError(`Invalid move`)
     }    
 
-    const winner = calculateWinner(update.board)
+    const winner = calculateWinner(player)
     if (winner) {
-      game.winner = winner
+      game.winner = player.symbol
       game.status = 'finished'
     }
-    else if (finished(update.board)) {
-      game.status = 'finished'
-    }
+    // else if (finished(update.board)) {
+    //   game.status = 'finished'
+    // }
     else {
       game.turn = player.symbol === 'x' ? 'o' : 'x'
     }
