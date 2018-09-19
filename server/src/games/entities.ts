@@ -1,7 +1,7 @@
 import { BaseEntity, PrimaryGeneratedColumn, Column, Entity, Index, OneToMany, ManyToOne, BeforeInsert } from 'typeorm'
 import User from '../users/entity'
 
-export type Symbol = 'x' | 'o' | 'c'
+export type Symbol = 'x' | 'o' | 'c' | 'a'
 export type Row = [ Symbol | null, Symbol | null, Symbol | null ]
 export type Board = [ Row, Row, Row, Row, Row ]
 
@@ -43,6 +43,9 @@ export class Game extends BaseEntity {
 
   @Column('char', {length:1, default: 'x'})
   turn: Symbol
+
+  @Column('char', {length:1, default: 'a' })
+  cup: Symbol
 
   @Column('char', {length:1, nullable: true})
   winner: Symbol

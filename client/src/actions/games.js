@@ -71,7 +71,7 @@ export const createGame = () => (dispatch, getState) => {
 export const updateGame = (gameId, board) => (dispatch, getState) => {
   const state = getState()
   const jwt = state.currentUser.jwt
-
+  console.log(`this is the board: ${board}`)
   if (isExpired(jwt)) return dispatch(logout())
 
   request
@@ -81,3 +81,10 @@ export const updateGame = (gameId, board) => (dispatch, getState) => {
     .then(_ => dispatch(updateGameSuccess()))
     .catch(err => console.error(err))
 }
+
+// export const addCup = (player) => (dispatch, getState) => {
+//   const state = getState()
+//   const jwt = state.currentUser.jwt
+
+
+// }
