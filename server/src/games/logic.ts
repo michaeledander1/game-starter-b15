@@ -1,12 +1,12 @@
 import { ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator'
-import { Board, Symbol, Row } from './entities'
+import { Board, Symbol, /*Row,*/ Player } from './entities'
 
 @ValidatorConstraint()
 export class IsBoard implements ValidatorConstraintInterface {
 
   validate(board: Board) {
-    const symbols = [ 'x', 'o', null ]
-    return board.length === 3 &&
+    const symbols = [ 'x', 'o', null, 'c', 'a', '-', 'X', 'O']
+    return board.length === 5 &&
       board.every(row =>
         row.length === 3 &&
         row.every(symbol => symbols.includes(symbol))
@@ -14,40 +14,58 @@ export class IsBoard implements ValidatorConstraintInterface {
   }
 }
 
-export const isValidTransition = (playerSymbol: Symbol, from: Board, to: Board) => {
-  const changes = from
-    .map(
-      (row, rowIndex) => row.map((symbol, columnIndex) => ({
-        from: symbol, 
-        to: to[rowIndex][columnIndex]
-      }))
-    )
-    .reduce((a,b) => a.concat(b))
-    .filter(change => change.from !== change.to)
+// Next function returns changes as an array of objects, each with 4 fields:
+// rowIndex (number), colIndex(number), from (symbol), to (symbol)
+//
+// Example values:
+// (1) In case only one of the 3x5 fields was change one could have:
+//     [{rowIndex: 0, colIndex: 2, from: '-', to: 'x'}]
+// (2) In case two of the 3x5 fields have been changed one could have:
+//     [{rowIndex: 1, colIndex:0, from: '-', to: 'x'},
+//      {rowIndex: 2, colIndex:2, from: 'c', to: 'o'}
+//     ]
 
-  return changes.length === 1 && 
-    changes[0].to === playerSymbol && 
-    changes[0].from === null
+export const getTransitions = (from: Board, to: Board) => {
+  return from.map(
+    (row, rowIndex) => row.map((symbol, columnIndex) => ({
+      rowIndex: rowIndex,
+      colIndex: columnIndex,
+      from: symbol, 
+      to: to[rowIndex][columnIndex]
+    }))
+  )
+  .reduce((a,b) => a.concat(b))
+  .filter(change => change.from !== change.to)
 }
 
-export const calculateWinner = (board: Board): Symbol | null =>
-  board
-    .concat(
-      // vertical winner
-      [0, 1, 2].map(n => board.map(row => row[n])) as Row[]
+export const isValidTransition = (playerSymbol: Symbol, from: Board, to: Board) => {
+  const changes = getTransitions(from, to)
+  console.log(`this is changes[0]!!!!!!!!!!!!!!!!!!! ${changes[0].from}`)
+  return changes.length === 1 && 
+    changes[0].to === (playerSymbol) && (
+      (changes[0].from === null) || 
+      (changes[0].from === 'c') ||
+      (changes[0].from === '-')
     )
-    .concat(
-      [
-        // diagonal winner ltr
-        [0, 1, 2].map(n => board[n][n]),
-        // diagonal winner rtl
-        [0, 1, 2].map(n => board[2-n][n])
-      ] as Row[]
-    )
-    .filter(row => row[0] && row.every(symbol => symbol === row[0]))
-    .map(row => row[0])[0] || null
+}
 
-export const finished = (board: Board): boolean =>
-  board
-    .reduce((a,b) => a.concat(b) as Row)
-    .every(symbol => symbol !== null)
+export const calculateWinner = (updatedBoard: Board): boolean => {
+  const winnerScoreX = updatedBoard
+    .map(array => array.includes('X'))
+    .filter(trueOrFalse => trueOrFalse)
+    .length
+  const winnerScoreO = updatedBoard
+    .map(array => array.includes('O'))
+    .filter(trueOrFalse => trueOrFalse)
+    .length
+  if (winnerScoreX === 2 || winnerScoreO === 2) {
+    return true
+  } else {
+    return false
+  }
+}
+
+// export const finished = (board: Board): boolean =>
+//   board
+//     .reduce((a,b) => a.concat(b) as Row)
+//     .every(symbol => symbol !== null)

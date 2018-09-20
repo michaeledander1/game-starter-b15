@@ -71,13 +71,24 @@ export const createGame = () => (dispatch, getState) => {
 export const updateGame = (gameId, board) => (dispatch, getState) => {
   const state = getState()
   const jwt = state.currentUser.jwt
-
+  console.log(`this is the board: ${board}`)
   if (isExpired(jwt)) return dispatch(logout())
 
   request
     .patch(`${baseUrl}/games/${gameId}`)
+    // set is visible in all requests, because to authenticate with a JWT,
+    // an HTTP header with key 'Authorization' and value 'Bearer {jwt}' is
     .set('Authorization', `Bearer ${jwt}`)
+    // This is the body that is sent with the REST patch request.
+    // In HTTPie this is what would come after the endpoint in the form 'name=hello'
     .send({ board })
     .then(_ => dispatch(updateGameSuccess()))
     .catch(err => console.error(err))
 }
+
+// export const addCup = (player) => (dispatch, getState) => {
+//   const state = getState()
+//   const jwt = state.currentUser.jwt
+
+
+// }

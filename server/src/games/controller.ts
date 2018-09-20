@@ -4,7 +4,7 @@ import {
 } from 'routing-controllers'
 import User from '../users/entity'
 import { Game, Player, Board } from './entities'
-import {IsBoard, isValidTransition, calculateWinner, finished} from './logic'
+import {IsBoard, getTransitions, isValidTransition, calculateWinner, /*finished*/} from './logic'
 import { Validate } from 'class-validator'
 import {io} from '../index'
 
@@ -79,34 +79,63 @@ export default class GameController {
   async updateGame(
     @CurrentUser() user: User,
     @Param('id') gameId: number,
+    // The 'update' here contains the from json text decoded new board, that we 
+    // provided to the REST request in the .send method of the client
     @Body() update: GameUpdate
   ) {
+    // Game = Game at server side
+    // .findOneById is a method that is inhereted from the magic BaseEntity class (see controller)
+    // So: 'const game' we can see as 'const oldgame' actually
     const game = await Game.findOneById(gameId)
     if (!game) throw new NotFoundError(`Game does not exist`)
 
+    //Player is a combi of a user at a game, so that's why we need 2 arguments
     const player = await Player.findOne({ user, game })
+
+    // PROBABLY, NOT SURE, the Errors 'thrown' in this code are caught on the client-side
+    // by the .catch methods.
 
     if (!player) throw new ForbiddenError(`You are not part of this game`)
     if (game.status !== 'started') throw new BadRequestError(`The game is not started yet`)
     if (player.symbol !== game.turn) throw new BadRequestError(`It's not your turn`)
+    
     if (!isValidTransition(player.symbol, game.board, update.board)) {
       throw new BadRequestError(`Invalid move`)
     }    
 
+    const changes = getTransitions(game.board, update.board)
+    // here we know that changes is an array with exactly ONE object
+    // The row and column number where the change occurred are
+    // in changes[0].rowIndex and changes[0].colIndex
+    const rowNum = changes[0].rowIndex
+    const colNum = changes[0].colIndex
+    if (game.board[rowNum][colNum] === 'c') {
+      if (player.symbol == 'x') {
+      update.board[rowNum][colNum] = 'X'
+      } else if (player.symbol == 'o') {
+      update.board[rowNum][colNum] = 'O'
+      }
+    }
+
     const winner = calculateWinner(update.board)
     if (winner) {
-      game.winner = winner
+      game.winner = player.symbol
       game.status = 'finished'
     }
-    else if (finished(update.board)) {
-      game.status = 'finished'
-    }
+    // else if (finished(update.board)) {
+    //   game.status = 'finished'
+    // }
     else {
       game.turn = player.symbol === 'x' ? 'o' : 'x'
     }
+    // Next line stores board as received via the REST call into the
+    // board of the current game IN MEMORY
     game.board = update.board
+    // Below really SAVES the game status FROM MEMORY TO THE DATABASE
     await game.save()
     
+    // The REST call has to give feedback to the client side.
+    // it's either the emit thing, or the return
     io.emit('action', {
       type: 'UPDATE_GAME',
       payload: game
