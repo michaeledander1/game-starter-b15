@@ -31,7 +31,7 @@ class GameDetails extends PureComponent {
         if ((rowIndex === toRow && cellIndex === toCell) && (cell === 'c')) {
           console.log(currentTurnPlayer)
           console.log(`game.cup ${game.cup}`)
-          return game.cup
+          return game.turn
         }
         if (rowIndex === toRow && cellIndex === toCell) {
           return game.turn

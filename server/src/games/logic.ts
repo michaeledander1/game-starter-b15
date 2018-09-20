@@ -1,5 +1,5 @@
 import { ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator'
-import { Board, Symbol, /*Row,*/ Player, Game } from './entities'
+import { Board, Symbol, /*Row,*/ Player } from './entities'
 
 @ValidatorConstraint()
 export class IsBoard implements ValidatorConstraintInterface {
@@ -40,7 +40,7 @@ export const getTransitions = (from: Board, to: Board) => {
 
 export const isValidTransition = (playerSymbol: Symbol, from: Board, to: Board) => {
   const changes = getTransitions(from, to)
-
+  console.log(`this is changes[0]!!!!!!!!!!!!!!!!!!! ${changes[0].from}`)
   return changes.length === 1 && 
     changes[0].to === (playerSymbol) && (
       (changes[0].from === null) || 

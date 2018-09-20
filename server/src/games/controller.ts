@@ -111,9 +111,9 @@ export default class GameController {
     const colNum = changes[0].colIndex
     if (game.board[rowNum][colNum] === 'c') {
       if (player.symbol == 'x') {
-        game.board[rowNum][colNum] = 'X'
+      update.board[rowNum][colNum] = 'X'
       } else if (player.symbol == 'o') {
-        game.board[rowNum][colNum] = 'O'
+      update.board[rowNum][colNum] = 'O'
       }
     }
 
