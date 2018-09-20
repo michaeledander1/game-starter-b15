@@ -47,9 +47,6 @@ export class Game extends BaseEntity {
   @Column('char', {length:1, default: 'x'})
   turn: Symbol
 
-  @Column('char', {length:1, default: 'a' })
-  cup: Symbol
-
   @Column('char', {length:1, nullable: true})
   winner: Symbol
 
@@ -86,6 +83,4 @@ export class Player extends BaseEntity {
   @Column('char', {length: 1})
   symbol: Symbol
 
-  @Column('int', {default: 0})
-  cupsclicked: number
 }
