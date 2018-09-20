@@ -49,11 +49,20 @@ export const isValidTransition = (playerSymbol: Symbol, from: Board, to: Board) 
     )
 }
 
-export const calculateWinner = (player: Player): boolean => {
-  if (player.cupsclicked === 2) {
+export const calculateWinner = (updatedBoard: Board): boolean => {
+  const winnerScoreX = updatedBoard
+    .map(array => array.includes('X'))
+    .filter(trueOrFalse => trueOrFalse)
+    .length
+  const winnerScoreO = updatedBoard
+    .map(array => array.includes('O'))
+    .filter(trueOrFalse => trueOrFalse)
+    .length
+  if (winnerScoreX === 2 || winnerScoreO === 2) {
     return true
   } else {
-    return false }
+    return false
+  }
 }
 
 // export const finished = (board: Board): boolean =>

@@ -117,7 +117,7 @@ export default class GameController {
       }
     }
 
-    const winner = calculateWinner(player)
+    const winner = calculateWinner(update.board)
     if (winner) {
       game.winner = player.symbol
       game.status = 'finished'
