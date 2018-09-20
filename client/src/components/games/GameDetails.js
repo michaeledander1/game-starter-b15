@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
-import {getGames, joinGame, updateGame} from '../../actions/games'
+import {getGames, joinGame, updateGame, addCup} from '../../actions/games'
 import {getUsers} from '../../actions/users'
 import {userId} from '../../jwt'
 import Paper from 'material-ui/Paper'
@@ -31,6 +31,8 @@ class GameDetails extends PureComponent {
         if ((rowIndex === toRow && cellIndex === toCell) && (cell === 'c')) {
           console.log(currentTurnPlayer)
           console.log(`game.cup ${game.cup}`)
+          const updatedPlayer = currentTurnPlayer.cupsclicked++
+          addCup(updatedPlayer)
           return game.cup
         }
         if (rowIndex === toRow && cellIndex === toCell) {
