@@ -2,14 +2,17 @@ import { BaseEntity, PrimaryGeneratedColumn, Column, Entity, Index, OneToMany, M
 import User from '../users/entity'
 
 export type Symbol = 'x' | 'o' | 'c' | 'a' | '-' | 'X' | 'O'
-export type Row = [ Symbol | null, Symbol | null, Symbol | null ]
-export type Board = [ Row, Row, Row, Row, Row ]
+export type Row = [ Symbol | null, Symbol | null, Symbol | null, Symbol | null, Symbol | null ]
+export type Board = [ Row, Row, Row, Row, Row, Row, Row, Row, Row, Row]
 
-const cupRowCenter: Row = [null, 'c', null]
-const cupRowLeft: Row = ['c', null, null]
-const cupRowRight: Row = [null, null,  'c']
-const emptyRow: Row = [null, null, null]
-const emptyBoard: Board = [ cupRowLeft, emptyRow, cupRowRight, emptyRow, cupRowCenter ]
+const cupRowFarFarRight: Row = [null, null, null, null, 'c']
+const cupRowFarRight: Row = [null, null, null, 'c', null]
+const cupRowCenter: Row = [null, 'c', null, null, null]
+const cupRowLeft: Row = ['c', null, null, null, null]
+const cupRowRight: Row = [null, null,  'c', null, null]
+const emptyRow: Row = [null, null, null, null, null]
+const emptyBoard: Board = [ cupRowLeft, emptyRow, cupRowRight, emptyRow, cupRowFarRight, emptyRow, 
+  emptyRow, cupRowFarFarRight, cupRowCenter, emptyRow ]
 
 type Status = 'pending' | 'started' | 'finished'
 
@@ -43,9 +46,6 @@ export class Game extends BaseEntity {
 
   @Column('char', {length:1, default: 'x'})
   turn: Symbol
-
-  @Column('char', {length:1, default: 'a' })
-  cup: Symbol
 
   @Column('char', {length:1, nullable: true})
   winner: Symbol
@@ -83,6 +83,4 @@ export class Player extends BaseEntity {
   @Column('char', {length: 1})
   symbol: Symbol
 
-  @Column('int', {default: 0})
-  cupsclicked: number
 }
