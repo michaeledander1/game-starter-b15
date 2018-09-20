@@ -60,10 +60,9 @@ class GameDetails extends PureComponent {
       .filter(p => p.symbol === game.winner)
       .map(p => p.userId)[0]
 
-    return (<Paper className="outer-paper">
-      <h1>Game #{game.id}</h1>
+    // const loser = game.players.symbol != game.turn
 
-      <p>Status: {game.status}</p>
+    return (<Paper className="outer-paper">
 
       {
         game.status === 'started' &&
@@ -79,14 +78,17 @@ class GameDetails extends PureComponent {
 
       {
         winner &&
-        <p>Winner: {users[winner].firstName}</p>
+        <div>
+          <p>Winner: {users[winner].firstName}</p>
+          {/* <p>{users[loser].firstName}, drink up!</p> */}
+        </div>
       }
 
       <hr />
 
       {
         game.status !== 'pending' &&
-        <Board board={game.board} makeMove={this.makeMove} />
+        <Board board={game.board} makeMove={this.makeMove} className='whole-board' />
       }
     </Paper>)
   }

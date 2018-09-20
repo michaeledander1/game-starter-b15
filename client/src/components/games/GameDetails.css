@@ -1,6 +1,13 @@
 .outer-paper {
   margin-top: 20px;
   margin: auto;
-  padding: 20px;
+  padding: 15px;
   width: 60%;
+  text-align: center
 }
+
+.whole-board {
+  display: flex;
+  justify-content: center;
+}
+
