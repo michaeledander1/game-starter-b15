@@ -40,7 +40,40 @@ class GameDetails extends PureComponent {
       })
     )
     updateGame(game.id, board)
+    // this.drinkBeer(game.board)
   }
+
+  // drinkBeer = (board) => {
+  //   const winnerScoreX = board
+  //     .map(array => array.includes('X'))
+  //     .filter(trueOrFalse => trueOrFalse)
+  //     .length
+  //   const winnerScoreO = board
+  //     .map(array => array.includes('O'))
+  //     .filter(trueOrFalse => trueOrFalse)
+  //     .length
+  //   if (winnerScoreX === 1) {
+  //     return <div>
+  //       Drink your beer!
+  //       <img alt='beer' src={'https://cdn1.wine-searcher.net/images/labels/90/80/heineken-lager-beer-amsterdam-netherlands-10519080.jpg'}/>
+  //     </div>
+  //   } if (winnerScoreX === 2) {
+  //     return <div>
+  //       Drink again! Watch out, if that loser across from you gets one more in a cup, you lose!
+  //       <img alt='beer' src={'https://cdn1.wine-searcher.net/images/labels/90/80/heineken-lager-beer-amsterdam-netherlands-10519080.jpg'}/>
+  //     </div>
+  //   } if (winnerScoreO === 1) {
+  //     return <div>
+  //       Drink your beer!
+  //       <img alt='beer' src={'https://cdn1.wine-searcher.net/images/labels/90/80/heineken-lager-beer-amsterdam-netherlands-10519080.jpg'}/>
+  //     </div>
+  //   } if (winnerScoreX === 2) {
+  //     return <div>
+  //       Drink again! Watch out, if that loser across from you gets one more in a cup, you lose!
+  //       <img alt='beer' src={'https://cdn1.wine-searcher.net/images/labels/90/80/heineken-lager-beer-amsterdam-netherlands-10519080.jpg'}/>
+  //     </div>
+  //   } else return null
+  // }
 
 
 
@@ -55,6 +88,8 @@ class GameDetails extends PureComponent {
     if (!game) return 'Not found'
 
     const player = game.players.find(p => p.userId === userId)
+    const playerX = game.players.symbol === 'x'
+    const playerO = game.players.symbl === 'o'
 
     const winner = game.players
       .filter(p => p.symbol === game.winner)
@@ -65,19 +100,44 @@ class GameDetails extends PureComponent {
     return (<Paper className="outer-paper">
       {
         game.status === 'started' &&
-        <div>INSTRUCTIONS</div>
+        <div className='instructions'>
+          <h2>Welcome to Beer Pong!</h2>
+          <p>Some cups are hidden under the MURICAN' FLAGS.
+            You want to hit as many cups as possible.
+            <br/>
+            How do you play?
+            <br/>
+            <br/>
+            1) Get a beer (Meaning, get a real beer!)
+            <br/>
+            2) Throw a ball! (So, click a field when it’s your turn!)
+            <br/>
+            <br/>
+            If you HIT a cup, a cup will appear.
+            <br/>
+            If you MISSED, a ball will appear.
+            <br/>
+            First player that hits 3 cups wins!!
+            <br/>
+            The loser downs his beer!!
+          </p>
+          {/* {this.drinkBeer()} */}
+        </div>
       }
       <br/>
       {
         game.status === 'started' &&
         player && player.symbol === game.turn &&
-        <div>It's your turn!</div>
+        <div>Go alreadyyyyyyyyy!</div>
       }
-
+      
+      {
+        game.board.includes
+      }
       {
         game.status === 'started' &&
         player.symbol !== game.turn &&
-        <div>Wait your turn</div>
+        <div>Wait your turn bro...</div>
       }
 
       {
@@ -89,7 +149,7 @@ class GameDetails extends PureComponent {
       {
         winner &&
         <div>
-          <p>Winner: {users[winner].firstName}</p>
+          <p>yooOOooOo {users[winner].firstName}, you won bro</p>
           {/* <p>{users[loser].firstName}, drink up!</p> */}
         </div>
       }
