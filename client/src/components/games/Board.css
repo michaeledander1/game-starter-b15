@@ -1,12 +1,12 @@
 .board-tile {
-  height: 50px;
+  height: 70px;
   width: 20%;
   background-color: rgb(105, 172, 136);
   text-align: center;
 }
 
 img {
-  height: 35px;
-  width: 35px;
+  height: 60px;
+  width: 120px;
 }
 

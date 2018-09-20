@@ -63,11 +63,21 @@ class GameDetails extends PureComponent {
     // const loser = game.players.symbol != game.turn
 
     return (<Paper className="outer-paper">
-
+      {
+        game.status === 'started' &&
+        <div>INSTRUCTIONS</div>
+      }
+      <br/>
       {
         game.status === 'started' &&
         player && player.symbol === game.turn &&
         <div>It's your turn!</div>
+      }
+
+      {
+        game.status === 'started' &&
+        player.symbol !== game.turn &&
+        <div>Wait your turn</div>
       }
 
       {

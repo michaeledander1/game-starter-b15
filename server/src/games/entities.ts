@@ -3,11 +3,11 @@ import User from '../users/entity'
 
 export type Symbol = 'x' | 'o' | 'c' | 'a' | '-' | 'X' | 'O'
 export type Row = [ Symbol | null, Symbol | null, Symbol | null, Symbol | null, Symbol | null ]
-export type Board = [ Row, Row, Row, Row, Row, Row, Row, Row, Row, Row]
+export type Board = [ Row, Row, Row, Row, Row, Row, Row]
 
 const emptyRow: Row = [null, null, null, null, null]
 const emptyBoard: Board = [ emptyRow, emptyRow, emptyRow, emptyRow, emptyRow, emptyRow, 
-  emptyRow, emptyRow, emptyRow, emptyRow ]
+  emptyRow ]
 
 type Status = 'pending' | 'started' | 'finished'
 
@@ -35,7 +35,7 @@ function shuffleTOTAL() {
 
   const blupBoard: Board = [ createRandomRow(), createRandomRow(), 
     createRandomRow(), createRandomRow(), createRandomRow(),
-    emptyRow, emptyRow, emptyRow, emptyRow, emptyRow]
+    emptyRow, emptyRow]
 
   return shuffle(blupBoard)
 }

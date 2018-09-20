@@ -56,7 +56,7 @@ const renderCel = (makeMove, rowIndex, cellIndex, symbol, hasTurn) => {
         disabled={hasTurn}
         onClick={() => makeMove(rowIndex, cellIndex)}
         key={`${rowIndex}-${cellIndex}`}
-      >{'try and hit me!'}</button>
+      ><img alt="beer-pong-table" src='https://i.pinimg.com/236x/9f/8c/08/9f8c085f5f56276379e9cb9af0f4bb27--usa-party-beer-pong-tables.jpg'/></button>
     )
   }
 }

@@ -28,3 +28,9 @@
   to { transform: rotate(360deg); }
 }
 
+.MuiPaper-root-9 {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+  color: white;
+}
+
+
