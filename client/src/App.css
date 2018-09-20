@@ -29,8 +29,14 @@
 }
 
 .MuiPaper-root-9 {
-  background-color: rgba(0, 0, 0, 0.5) !important;
+  background-color: rgba(29, 29, 29, 0.5) !important;
   color: white;
 }
+
+.MuiTypography-title-44 {
+  font-family:'Pangolin', cursive !important;
+}
+
+
 
 
