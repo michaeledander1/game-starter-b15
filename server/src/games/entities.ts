@@ -2,32 +2,42 @@ import { BaseEntity, PrimaryGeneratedColumn, Column, Entity, Index, OneToMany, M
 import User from '../users/entity'
 
 export type Symbol = 'x' | 'o' | 'c' | 'a' | '-' | 'X' | 'O'
-export type Row = [ Symbol | null, Symbol | null, Symbol | null ]
-export type Board = [ Row, Row, Row, Row, Row ]
+export type Row = [ Symbol | null, Symbol | null, Symbol | null, Symbol | null, Symbol | null ]
+export type Board = [ Row, Row, Row, Row, Row, Row, Row, Row, Row, Row]
 
-const cupRowCenter: Row = [null, 'c', null]
-const cupRowLeft: Row = ['c', null, null]
-const cupRowRight: Row = [null, null,  'c']
-const emptyRow: Row = [null, null, null]
-const emptyBoard: Board = [ cupRowLeft, emptyRow, cupRowRight, emptyRow, cupRowCenter ]
+const emptyRow: Row = [null, null, null, null, null]
+const emptyBoard: Board = [ emptyRow, emptyRow, emptyRow, emptyRow, emptyRow, emptyRow, 
+  emptyRow, emptyRow, emptyRow, emptyRow ]
 
 type Status = 'pending' | 'started' | 'finished'
 
+
 function shuffle(array) {
-  var currentIndex = array.length, temporaryValue, randomIndex;
-  while (0 !== currentIndex) {
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
-  }
-  return array;
+var currentIndex = array.length, temporaryValue, randomIndex;
+while (0 !== currentIndex) {
+  randomIndex = Math.floor(Math.random() * currentIndex);
+  currentIndex -= 1;
+  temporaryValue = array[currentIndex];
+  array[currentIndex] = array[randomIndex];
+  array[randomIndex] = temporaryValue;
+}
+return array;
 }
 
-function makeNewBoard() {
-  const newBoard = shuffle(emptyBoard)
-  return newBoard
+function shuffleTOTAL() {
+
+  function createRandomRow() {
+    const initialRow: Row = [null, null, null, null, null]
+    const randomnr = Math.floor(Math.random()*5)
+    initialRow[randomnr] = 'c'
+    return initialRow
+  }
+
+  const blupBoard: Board = [ createRandomRow(), createRandomRow(), 
+    createRandomRow(), createRandomRow(), createRandomRow(),
+    emptyRow, emptyRow, emptyRow, emptyRow, emptyRow]
+
+  return shuffle(blupBoard)
 }
 
 
@@ -44,9 +54,6 @@ export class Game extends BaseEntity {
   @Column('char', {length:1, default: 'x'})
   turn: Symbol
 
-  @Column('char', {length:1, default: 'a' })
-  cup: Symbol
-
   @Column('char', {length:1, nullable: true})
   winner: Symbol
 
@@ -60,7 +67,7 @@ export class Game extends BaseEntity {
   
   @BeforeInsert()
     newBoard() {
-      this.board = makeNewBoard();
+      this.board = shuffleTOTAL();
     }
 }
 
@@ -83,6 +90,4 @@ export class Player extends BaseEntity {
   @Column('char', {length: 1})
   symbol: Symbol
 
-  @Column('int', {default: 0})
-  cupsclicked: number
 }

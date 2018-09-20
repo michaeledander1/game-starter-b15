@@ -1,14 +1,14 @@
 import { ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator'
-import { Board, Symbol, /*Row,*/ Player } from './entities'
+import { Board, Symbol, /*Row,*/ } from './entities'
 
 @ValidatorConstraint()
 export class IsBoard implements ValidatorConstraintInterface {
 
   validate(board: Board) {
     const symbols = [ 'x', 'o', null, 'c', 'a', '-', 'X', 'O']
-    return board.length === 5 &&
+    return board.length === 10 &&
       board.every(row =>
-        row.length === 3 &&
+        row.length === 5 &&
         row.every(symbol => symbols.includes(symbol))
       )
   }
@@ -58,7 +58,7 @@ export const calculateWinner = (updatedBoard: Board): boolean => {
     .map(array => array.includes('O'))
     .filter(trueOrFalse => trueOrFalse)
     .length
-  if (winnerScoreX === 2 || winnerScoreO === 2) {
+  if (winnerScoreX === 3 || winnerScoreO === 3) {
     return true
   } else {
     return false

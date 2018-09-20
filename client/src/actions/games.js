@@ -85,10 +85,3 @@ export const updateGame = (gameId, board) => (dispatch, getState) => {
     .then(_ => dispatch(updateGameSuccess()))
     .catch(err => console.error(err))
 }
-
-// export const addCup = (player) => (dispatch, getState) => {
-//   const state = getState()
-//   const jwt = state.currentUser.jwt
-
-
-// }
