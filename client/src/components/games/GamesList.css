@@ -4,6 +4,7 @@ h2 {
 }
 
 .game-card {
+  /* background-color: orange; */
   margin: 10px 10px 10px 0px;
 }
 
@@ -16,4 +17,5 @@ h2 {
   margin-top: 20px;
   padding: 20px;
   width: 60%;
+  color:white;
 }
