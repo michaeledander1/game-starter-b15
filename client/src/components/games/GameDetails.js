@@ -48,13 +48,13 @@ class GameDetails extends PureComponent {
       .length  
     if (winnerScoreX === 1) {
       return <div>
-        Drink your beer!
         <img className="grolsch" src={grolsch} alt="beer" />
+        The other player just hit a cup! Drink a sip of your beer, 
       </div>
     } if (winnerScoreX === 2) {
       return <div>
-        Drink again! Watch out, if that loser across from you gets one more in a cup, you lose!
         <img className="grolsch" src={grolsch} alt="beer" />
+        Drink another sip! Watch out, if that loser across from you gets one more in a cup, you lose,
       </div>
     } else return null
   }
@@ -64,15 +64,14 @@ class GameDetails extends PureComponent {
       .filter(trueOrFalse => trueOrFalse)
       .length
     if (winnerScoreO === 1) {
-      // window.alert('yo yo yo yo 1 HIT')
       return <div>
-        The other player just hit a cup! Drink a sip of your beer buddy!
         <img className="grolsch" src={grolsch} alt="beer" />
+        The other player just hit a cup! Drink a sip of your beer,
       </div>
     } if (winnerScoreO === 2) {
       return <div>
-        Drink another sip! Watch out, if that loser across from you gets one more cup, you lose!
         <img className="grolsch" src={grolsch} alt="beer" />
+        Drink another sip! Watch out, if that loser across from you gets one more cup, you lose,
       </div>
     } else return null
   }
@@ -90,6 +89,14 @@ class GameDetails extends PureComponent {
     // const playerX = game.players.symbol === 'x'
     // const playerO = game.players.symbol === 'o'
 
+    const drinkerX = game.players
+      .filter(p => p.symbol === 'x')
+      .map(p => p.userId)[0]
+
+    const drinkerO = game.players
+      .filter(p => p.symbol === 'o')
+      .map(p => p.userId)[0]
+
     const winner = game.players
       .filter(p => p.symbol === game.winner)
       .map(p => p.userId)[0]
@@ -103,7 +110,6 @@ class GameDetails extends PureComponent {
         game.status === 'started' &&
         <div className='instructions'>
           <h2>Welcome to Beer Pong!</h2>
-          {game.id}
           <p>The cups are hidden under the table cloth.
             You want to hit as many cups as possible.
             <br/>
@@ -124,13 +130,13 @@ class GameDetails extends PureComponent {
       {
         game.status === 'started' &&
         player.symbol === 'x' &&
-        <div>{this.drinkBeerX(this.props.game.board)}</div>
+        <div>{this.drinkBeerX(this.props.game.board)} {users[drinkerX].firstName}!</div>
       }
 
       {
         game.status === 'started' &&
         player.symbol === 'o' &&
-        <div>{this.drinkBeerO(this.props.game.board)}</div>
+        <div>{this.drinkBeerO(this.props.game.board)} {users[drinkerO].firstName}!</div>
       }
 
       {
