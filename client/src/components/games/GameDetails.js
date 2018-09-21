@@ -24,21 +24,9 @@ class GameDetails extends PureComponent {
     const { players } = game
     const currentPlayer = players.filter(p => p.symbol === game.turn)
     const currentTurnPlayer = currentPlayer[0]
-    // const turnLength = setInterval(turnTimer, 3000);
-      
-    // turnTimer = () => {
-    //     if (game.turn === 'x') {
-    //       return game.turn === 'o'
-    //     }
-    //     if (game.turn === 'o') {
-    //       return game.turn === 'x'
-    //     }
-    //   }
-    
 
     const board = game.board.map(
       (row, rowIndex) => row.map((cell, cellIndex) => {
-        // if (cell === 'c') return game.players.cupsclicked++
         if ((rowIndex === toRow && cellIndex === toCell) && (cell === 'c')) {
           console.log(currentTurnPlayer)
           console.log(`game.cup ${game.cup}`)
