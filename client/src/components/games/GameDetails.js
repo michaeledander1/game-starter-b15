@@ -7,6 +7,7 @@ import {userId} from '../../jwt'
 import Paper from 'material-ui/Paper'
 import Board from './Board'
 import './GameDetails.css'
+import grolsch from '../../images/grolsch.png'
 
 class GameDetails extends PureComponent {
 
@@ -48,12 +49,12 @@ class GameDetails extends PureComponent {
     if (winnerScoreX === 1) {
       return <div>
         Drink your beer!
-        <img alt='beer' src={'https://cdn1.wine-searcher.net/images/labels/90/80/heineken-lager-beer-amsterdam-netherlands-10519080.jpg'}/>
+        <img className="grolsch" src={grolsch} alt="beer" />
       </div>
     } if (winnerScoreX === 2) {
       return <div>
         Drink again! Watch out, if that loser across from you gets one more in a cup, you lose!
-        <img alt='beer' src={'https://cdn1.wine-searcher.net/images/labels/90/80/heineken-lager-beer-amsterdam-netherlands-10519080.jpg'}/>
+        <img className="grolsch" src={grolsch} alt="beer" />
       </div>
     } else return null
   }
@@ -65,12 +66,12 @@ class GameDetails extends PureComponent {
     if (winnerScoreO === 1) {
       return <div>
         The other player just hit a cup! Drink up buddy!
-        <img alt='beer' src={'https://cdn1.wine-searcher.net/images/labels/90/80/heineken-lager-beer-amsterdam-netherlands-10519080.jpg'}/>
+        <img className="grolsch" src={grolsch} alt="beer" />
       </div>
     } if (winnerScoreO === 2) {
       return <div>
         Drink again! Watch out, if that loser across from you gets one more cup, you lose!
-        <img alt='beer' src={'https://cdn1.wine-searcher.net/images/labels/90/80/heineken-lager-beer-amsterdam-netherlands-10519080.jpg'}/>
+        <img className="grolsch" src={grolsch} alt="beer" />
       </div>
     } else return null
   }
