@@ -1,6 +1,6 @@
-# Tic Tac Toe Server
+# Beer pong Server
 
-This is a server for playing a multiplayer Tic Tac Toe game. 
+This is a server for playing a multiplayer Beer pong game. 
 
 It has these endpoints:
 

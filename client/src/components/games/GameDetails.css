@@ -11,3 +11,9 @@
   justify-content: center;
 }
 
+.instructions h2 {
+  font-size: 24px;
+}
+.instructions {
+  font-size: 18px;
+}

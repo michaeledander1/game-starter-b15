@@ -27,7 +27,6 @@ class GameDetails extends PureComponent {
 
     const board = game.board.map(
       (row, rowIndex) => row.map((cell, cellIndex) => {
-        // if (cell === 'c') return game.players.cupsclicked++
         if ((rowIndex === toRow && cellIndex === toCell) && (cell === 'c')) {
           console.log(currentTurnPlayer)
           console.log(`game.cup ${game.cup}`)
@@ -41,9 +40,40 @@ class GameDetails extends PureComponent {
     )
     updateGame(game.id, board)
   }
-
-
-
+  drinkBeerO = (board) => {
+    const winnerScoreX = board
+      .map(array => array.includes('X'))
+      .filter(trueOrFalse => trueOrFalse)
+      .length  
+    if (winnerScoreX === 1) {
+      return <div>
+        Drink your beer!
+        <img alt='beer' src={'https://cdn1.wine-searcher.net/images/labels/90/80/heineken-lager-beer-amsterdam-netherlands-10519080.jpg'}/>
+      </div>
+    } if (winnerScoreX === 2) {
+      return <div>
+        Drink again! Watch out, if that loser across from you gets one more in a cup, you lose!
+        <img alt='beer' src={'https://cdn1.wine-searcher.net/images/labels/90/80/heineken-lager-beer-amsterdam-netherlands-10519080.jpg'}/>
+      </div>
+    } else return null
+  }
+  drinkBeerX = (board) => {
+    const winnerScoreO = board
+      .map(array => array.includes('O'))
+      .filter(trueOrFalse => trueOrFalse)
+      .length
+    if (winnerScoreO === 1) {
+      return <div>
+        The other player just hit a cup! Drink up buddy!
+        <img alt='beer' src={'https://cdn1.wine-searcher.net/images/labels/90/80/heineken-lager-beer-amsterdam-netherlands-10519080.jpg'}/>
+      </div>
+    } if (winnerScoreO === 2) {
+      return <div>
+        Drink again! Watch out, if that loser across from you gets one more cup, you lose!
+        <img alt='beer' src={'https://cdn1.wine-searcher.net/images/labels/90/80/heineken-lager-beer-amsterdam-netherlands-10519080.jpg'}/>
+      </div>
+    } else return null
+  }
   render() {
     const {game, users, authenticated, userId} = this.props
 
@@ -55,19 +85,69 @@ class GameDetails extends PureComponent {
     if (!game) return 'Not found'
 
     const player = game.players.find(p => p.userId === userId)
+    const playerX = game.players.symbol === 'x'
+    const playerO = game.players.symbl === 'o'
 
     const winner = game.players
       .filter(p => p.symbol === game.winner)
       .map(p => p.userId)[0]
-
-    // const loser = game.players.symbol != game.turn
+    
+    const loser = game.players
+      .filter(p => p.symbol !== game.winner)
+      .map(p => p.userId)[0]
 
     return (<Paper className="outer-paper">
+      {
+        game.status === 'started' &&
+        <div className='instructions'>
+          <h2>Welcome to Beer Pong!</h2>
+          <p>Some cups are hidden under the MURICAN' FLAGS.
+            You want to hit as many cups as possible.
+            <br/>
+            How do you play?
+            <br/>
+            <br/>
+            1) Get a beer (Meaning, get a real beer!)
+            <br/>
+            2) Throw a ball! (So, click a field when it’s your turn!)
+            <br/>
+            <br/>
+            If you HIT a cup, a cup will appear.
+            <br/>
+            If you MISSED, a ball will appear.
+            <br/>
+            First player that hits 3 cups wins!!
+            <br/>
+            The loser downs his beer!!
+          </p>
+        </div>
+      }
+      <br/>
+      {
+        game.status === 'started' &&
+        player.symbol === 'x' &&
+        <div>{this.drinkBeerX(this.props.game.board)}</div>
+      }
+
+      {
+        game.status === 'started' &&
+        player.symbol === 'o' &&
+        <div>{this.drinkBeerO(this.props.game.board)}</div>
+      }
 
       {
         game.status === 'started' &&
         player && player.symbol === game.turn &&
-        <div>It's your turn!</div>
+        <div>
+          <p>Go alreadyyyyyyyyy!</p>
+        </div>
+      }
+      {
+        game.status === 'started' &&
+        player.symbol !== game.turn &&
+        <div>
+        <p>Wait your turn bro...</p>
+        </div>
       }
 
       {
@@ -79,12 +159,11 @@ class GameDetails extends PureComponent {
       {
         winner &&
         <div>
-          <p>Winner: {users[winner].firstName}</p>
-          {/* <p>{users[loser].firstName}, drink up!</p> */}
+          <p>yooOOooOo {users[winner].firstName}, you won bro</p>
+          <p>{users[loser].firstName}, you lose! Drink up!</p>
+
         </div>
       }
-
-      <hr />
 
       {
         game.status !== 'pending' &&

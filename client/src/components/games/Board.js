@@ -1,6 +1,12 @@
 import React from 'react'
 import './Board.css'
 
+import ballRed from '../../images/pingPongBallRedSmall.png'
+import ballBlue from '../../images/pingPongBallBlueSeaSmall.png'
+import cupRed from '../../images/beerPongCupRed.png'
+import cupBlue from '../../images/beerPongCupBlueSea.png'
+import nothing from '../../images/nothing.png'
+
 // const renderCel = (makeMove, rowIndex, cellIndex, symbol, hasTurn) => {
 //   return (
 //     <button
@@ -20,7 +26,9 @@ const renderCel = (makeMove, rowIndex, cellIndex, symbol, hasTurn) => {
       disabled={hasTurn}
       onClick={() => makeMove(rowIndex, cellIndex)}
       key={`${rowIndex}-${cellIndex}`}
-    ><img alt="ball-red" src='https://cdn8.bigcommerce.com/s-j9ozu27b9o/images/stencil/500x500/products/243/562/ping-pong-ball-red__01202__61456.1513025206__06721.1521746280.jpg?c=2'/></button>
+    >
+    <img className="beerpongballs" src={ballRed} alt="ballRed" />
+    </button>
   ) 
   } else if (symbol === 'x'){
     return (
@@ -29,7 +37,7 @@ const renderCel = (makeMove, rowIndex, cellIndex, symbol, hasTurn) => {
         disabled={hasTurn}
         onClick={() => makeMove(rowIndex, cellIndex)}
         key={`${rowIndex}-${cellIndex}`}
-      ><img alt="ball-blue" src='https://images-na.ssl-images-amazon.com/images/I/31WyE7degAL._SY355_.jpg'/></button>
+      ><img className="beerpongballs" src={ballBlue} alt="ballBlue" /></button>
     )
   } else if (symbol === 'O'){
       return (
@@ -38,16 +46,18 @@ const renderCel = (makeMove, rowIndex, cellIndex, symbol, hasTurn) => {
           disabled={hasTurn}
           onClick={() => makeMove(rowIndex, cellIndex)}
           key={`${rowIndex}-${cellIndex}`}
-        ><img alt="beer-red" src='https://www.a2deals.nl/wp-content/uploads/2017/09/669236881-1.jpg'/></button>
+        >
+        <img className="beerpongcups" src={cupRed} alt="cupRed" />
+        </button>
       )
   } else if (symbol === 'X'){
     return (
-      <button
+      <button 
         className="board-tile"
         disabled={hasTurn}
         onClick={() => makeMove(rowIndex, cellIndex)}
         key={`${rowIndex}-${cellIndex}`}
-      ><img alt="beer-blue" src='http://beeriton.nl/wp-content/uploads/2015/04/Beer-Pong-Cups-blauw.jpg'/></button>
+      ><img className="beerpongcups" src={cupBlue} alt="cupBlue" /></button>
     )
   } else {
     return (
@@ -56,7 +66,9 @@ const renderCel = (makeMove, rowIndex, cellIndex, symbol, hasTurn) => {
         disabled={hasTurn}
         onClick={() => makeMove(rowIndex, cellIndex)}
         key={`${rowIndex}-${cellIndex}`}
-      >{'try and hit me!'}</button>
+      >
+      <img className="invisible" src={nothing} alt="nothing"/>
+      </button>
     )
   }
 }

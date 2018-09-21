@@ -1,9 +1,47 @@
-.App {
-  text-align: center;
-
+/* ( Background )color of the game cards, excluding (background of ) WATCH */
+.MuiCardContent-root-93 {
+  background-color: rgba(187, 125, 125, 0.329) !important;
+  color: white;
+}
+/* Background color of the "WATCH" part for each of the game cards*/
+.MuiCardActions-root-94 {
+  background-color: rgba(187, 125, 125, 0.329) !important;
 }
 
-.App-logo {
+/* Background color of App bar & entire block that contains gamelist */
+.MuiPaper-root-9 {
+  background-color: rgba(75, 75, 75, 0.445) !important;
+  font-size: 30px !important;
+}
+
+/* The text color in each of the cards in the list of games */
+.MuiTypography-root-38 {
+  color: rgba(255, 255, 255, 0.748) !important;
+  font-size: 22px !important;
+}
+
+/* The PLAY button in each of the game cards*/
+.MuiButton-label-63 {
+  color: rgba(255, 255, 255, 0.748) !important;
+  font-weight: bold !important;
+  font-size: 18px !important;
+}
+
+/* Backgroundcolor of buttons PLAY, CREATE GAME and LOG OUT in GameList  */
+.MuiButtonBase-root-77 {
+  background-color: rgb(137, 0, 15) !important;
+}
+
+.MuiTypography-title-44 {
+  font-family:'Pangolin', cursive !important;
+}
+
+.App {
+  text-align: center;
+}
+
+/* OLD CSS THAT IS PROBABLY NOT IMPORTANT BUT THAT WE KEEP TO BE SURE */
+/* .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
 }
@@ -26,5 +64,9 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
-}
+} */
+
+
+
+
 
