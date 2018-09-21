@@ -1,12 +1,28 @@
 .board-tile {
-  height: 70px;
-  width: 20%;
-  background-color: rgb(105, 172, 136);
+  height: 100px;
+  width: 200px;
+  background: url('../../images/retrobackground.jpg');
+  background-size: 250px 250px;
   text-align: center;
+  border: 0px;
 }
 
-img {
+/* img {
   height: 60px;
-  width: 120px;
+  width: 60px;
+} */
+
+.beerpongcups{
+  height: 80px;
+  width: 80px;
 }
 
+.beerpongballs{
+  height: 80px;
+  width: 80px;
+}
+
+.invisible{
+  height: 80px;
+  width: 80px;
+}

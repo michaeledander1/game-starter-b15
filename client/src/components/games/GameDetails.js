@@ -39,7 +39,6 @@ class GameDetails extends PureComponent {
       })
     )
     updateGame(game.id, board)
-    // this.drinkBeer(game.board)
   }
   drinkBeerO = (board) => {
     const winnerScoreX = board
@@ -75,9 +74,6 @@ class GameDetails extends PureComponent {
       </div>
     } else return null
   }
-
-
-
   render() {
     const {game, users, authenticated, userId} = this.props
 
@@ -165,6 +161,7 @@ class GameDetails extends PureComponent {
         <div>
           <p>yooOOooOo {users[winner].firstName}, you won bro</p>
           <p>{users[loser].firstName}, you lose! Drink up!</p>
+
         </div>
       }
 
