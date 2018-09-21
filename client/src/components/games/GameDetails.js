@@ -8,6 +8,7 @@ import Paper from 'material-ui/Paper'
 import Board from './Board'
 import './GameDetails.css'
 import grolsch from '../../images/grolsch.png'
+import heineken from '../../images/heineken.png'
 
 class GameDetails extends PureComponent {
 
@@ -81,7 +82,7 @@ class GameDetails extends PureComponent {
     if (!authenticated) return (
 			<Redirect to="/login" />
 		)
-
+    
     if (game === null || users === null) return 'Loading...'
     if (!game) return 'Not found'
 
@@ -100,12 +101,12 @@ class GameDetails extends PureComponent {
     const winner = game.players
       .filter(p => p.symbol === game.winner)
       .map(p => p.userId)[0]
-    
-    const loser = game.players
+      
+      const loser = game.players
       .filter(p => p.symbol !== game.winner)
       .map(p => p.userId)[0]
-
-    return (<Paper className="outer-paper">
+      
+      return (<Paper className="outer-paper">
       {
         game.status === 'started' &&
         <div className='instructions'>
@@ -163,15 +164,23 @@ class GameDetails extends PureComponent {
       {
         winner &&
         <div>
-          <p>yooOOooOo {users[winner].firstName}, you won bro</p>
+          <p>yooOOooOo {users[winner].firstName}, you won bro!!</p>
           <p>{users[loser].firstName}, you lose! Drink up!</p>
-
+          <p>That was not too good was it... go and learn about beer pong through <a href="https://www.youtube.com/watch?v=Coctj-3Yzic" target="_blank" rel="noopener noreferrer"> this great video!</a></p>
         </div>
       }
 
       {
-        game.status !== 'pending' &&
+        game.status !== ('pending') && game.status !== ('finished') &&
         <Board board={game.board} makeMove={this.makeMove} className='whole-board' />
+      }
+
+      {
+        game.status === ('finished') &&
+        <span>
+          <img className="bigheineken" src={heineken} alt="beer" />
+          <img className="bigheineken" src={heineken} alt="beer" />
+        </span>
       }
     </Paper>)
   }
