@@ -1,8 +1,10 @@
 .board-tile {
   height: 70px;
   width: 20%;
-  background-color: rgb(105, 172, 136);
+  background: url('../../images/tableClothBlackWhite.png');
+  background-size: 72px 55px;
   text-align: center;
+  border: 0px;
 }
 
 img {

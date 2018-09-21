@@ -1,5 +1,6 @@
 import React from 'react'
 import './Board.css'
+import beerPongCupBlack from '../../images/BeerPongCup.svg'
 
 // const renderCel = (makeMove, rowIndex, cellIndex, symbol, hasTurn) => {
 //   return (
@@ -38,7 +39,9 @@ const renderCel = (makeMove, rowIndex, cellIndex, symbol, hasTurn) => {
           disabled={hasTurn}
           onClick={() => makeMove(rowIndex, cellIndex)}
           key={`${rowIndex}-${cellIndex}`}
-        ><img alt="beer-red" src='https://www.a2deals.nl/wp-content/uploads/2017/09/669236881-1.jpg'/></button>
+        >
+        <img alt="beer-red" src='https://www.a2deals.nl/wp-content/uploads/2017/09/669236881-1.jpg'/>
+        </button>
       )
   } else if (symbol === 'X'){
     return (
@@ -56,7 +59,10 @@ const renderCel = (makeMove, rowIndex, cellIndex, symbol, hasTurn) => {
         disabled={hasTurn}
         onClick={() => makeMove(rowIndex, cellIndex)}
         key={`${rowIndex}-${cellIndex}`}
-      ><img alt="beer-pong-table" src='https://i.pinimg.com/236x/9f/8c/08/9f8c085f5f56276379e9cb9af0f4bb27--usa-party-beer-pong-tables.jpg'/></button>
+      >
+      <img src={beerPongCupBlack} height='10%' width='10%' alt="beerPongCupBlack" />
+      {/* <img alt="beer-pong-table" src='https://i.pinimg.com/236x/9f/8c/08/9f8c085f5f56276379e9cb9af0f4bb27--usa-party-beer-pong-tables.jpg'/> */}
+      </button>
     )
   }
 }
