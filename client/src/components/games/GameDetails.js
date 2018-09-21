@@ -64,13 +64,14 @@ class GameDetails extends PureComponent {
       .filter(trueOrFalse => trueOrFalse)
       .length
     if (winnerScoreO === 1) {
+      // window.alert('yo yo yo yo 1 HIT')
       return <div>
-        The other player just hit a cup! Drink up buddy!
+        The other player just hit a cup! Drink a sip of your beer buddy!
         <img className="grolsch" src={grolsch} alt="beer" />
       </div>
     } if (winnerScoreO === 2) {
       return <div>
-        Drink again! Watch out, if that loser across from you gets one more cup, you lose!
+        Drink another sip! Watch out, if that loser across from you gets one more cup, you lose!
         <img className="grolsch" src={grolsch} alt="beer" />
       </div>
     } else return null
@@ -86,8 +87,8 @@ class GameDetails extends PureComponent {
     if (!game) return 'Not found'
 
     const player = game.players.find(p => p.userId === userId)
-    const playerX = game.players.symbol === 'x'
-    const playerO = game.players.symbl === 'o'
+    // const playerX = game.players.symbol === 'x'
+    // const playerO = game.players.symbol === 'o'
 
     const winner = game.players
       .filter(p => p.symbol === game.winner)
@@ -102,7 +103,8 @@ class GameDetails extends PureComponent {
         game.status === 'started' &&
         <div className='instructions'>
           <h2>Welcome to Beer Pong!</h2>
-          <p>Some cups are hidden under the MURICAN' FLAGS.
+          {game.id}
+          <p>The cups are hidden under the table cloth.
             You want to hit as many cups as possible.
             <br/>
             How do you play?
@@ -113,17 +115,12 @@ class GameDetails extends PureComponent {
             2) Throw a ball! (So, click a field when it’s your turn!)
             <br/>
             <br/>
-            If you HIT a cup, a cup will appear.
+            If you HIT a cup, a cup will appear. If you MISSED, a ball will appear.
             <br/>
-            If you MISSED, a ball will appear.
-            <br/>
-            First player that hits 3 cups wins!!
-            <br/>
-            The loser downs his beer!!
+            First player that hits 3 cups wins. The loser downs his beer!!!
           </p>
         </div>
       }
-      <br/>
       {
         game.status === 'started' &&
         player.symbol === 'x' &&
