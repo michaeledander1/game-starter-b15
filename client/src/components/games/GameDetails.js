@@ -131,15 +131,13 @@ class GameDetails extends PureComponent {
       {
         game.status === 'started' &&
         player.symbol === 'x' &&
-        <div>{this.drinkBeerX(this.props.game.board)} {users[drinkerX].firstName}!</div>
+        <div>{this.drinkBeerX(this.props.game.board)} {users[drinkerX].firstName}</div>
       }
-
       {
         game.status === 'started' &&
         player.symbol === 'o' &&
-        <div>{this.drinkBeerO(this.props.game.board)} {users[drinkerO].firstName}!</div>
+        <div>{this.drinkBeerO(this.props.game.board)} {users[drinkerO].firstName}</div>
       }
-
       {
         game.status === 'started' &&
         player && player.symbol === game.turn &&
@@ -166,7 +164,7 @@ class GameDetails extends PureComponent {
         <div>
           <p>yooOOooOo {users[winner].firstName}, you won bro!!</p>
           <p>{users[loser].firstName}, you lose! Drink up!</p>
-          <p>That was not too good was it... go and learn about beer pong through <a href="https://www.youtube.com/watch?v=Coctj-3Yzic" target="_blank" rel="noopener noreferrer"> this great video!</a></p>
+          <p>That was not too good was it {users[loser].firstName}... go and learn about beer pong through <a href="https://www.youtube.com/watch?v=Coctj-3Yzic" target="_blank" rel="noopener noreferrer"> this great video!</a></p>
         </div>
       }
 

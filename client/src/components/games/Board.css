@@ -4,7 +4,7 @@
   background: url('../../images/retrobackground.jpg');
   background-size: 250px 250px;
   text-align: center;
-  border: 0px;
+  border: solid rgb(0, 0, 0) 3px;
 }
 
 /* img {
