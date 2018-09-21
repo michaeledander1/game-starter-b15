@@ -40,42 +40,7 @@ class GameDetails extends PureComponent {
       })
     )
     updateGame(game.id, board)
-    // this.drinkBeer(game.board)
   }
-
-  // drinkBeer = (board) => {
-  //   const winnerScoreX = board
-  //     .map(array => array.includes('X'))
-  //     .filter(trueOrFalse => trueOrFalse)
-  //     .length
-  //   const winnerScoreO = board
-  //     .map(array => array.includes('O'))
-  //     .filter(trueOrFalse => trueOrFalse)
-  //     .length
-  //   if (winnerScoreX === 1) {
-  //     return <div>
-  //       Drink your beer!
-  //       <img alt='beer' src={'https://cdn1.wine-searcher.net/images/labels/90/80/heineken-lager-beer-amsterdam-netherlands-10519080.jpg'}/>
-  //     </div>
-  //   } if (winnerScoreX === 2) {
-  //     return <div>
-  //       Drink again! Watch out, if that loser across from you gets one more in a cup, you lose!
-  //       <img alt='beer' src={'https://cdn1.wine-searcher.net/images/labels/90/80/heineken-lager-beer-amsterdam-netherlands-10519080.jpg'}/>
-  //     </div>
-  //   } if (winnerScoreO === 1) {
-  //     return <div>
-  //       Drink your beer!
-  //       <img alt='beer' src={'https://cdn1.wine-searcher.net/images/labels/90/80/heineken-lager-beer-amsterdam-netherlands-10519080.jpg'}/>
-  //     </div>
-  //   } if (winnerScoreX === 2) {
-  //     return <div>
-  //       Drink again! Watch out, if that loser across from you gets one more in a cup, you lose!
-  //       <img alt='beer' src={'https://cdn1.wine-searcher.net/images/labels/90/80/heineken-lager-beer-amsterdam-netherlands-10519080.jpg'}/>
-  //     </div>
-  //   } else return null
-  // }
-
-
 
   render() {
     const {game, users, authenticated, userId} = this.props
@@ -121,7 +86,6 @@ class GameDetails extends PureComponent {
             <br/>
             The loser downs his beer!!
           </p>
-          {/* {this.drinkBeer()} */}
         </div>
       }
       <br/>
@@ -150,7 +114,6 @@ class GameDetails extends PureComponent {
         winner &&
         <div>
           <p>yooOOooOo {users[winner].firstName}, you won bro</p>
-          {/* <p>{users[loser].firstName}, drink up!</p> */}
         </div>
       }
 
