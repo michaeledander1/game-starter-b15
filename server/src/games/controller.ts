@@ -112,6 +112,7 @@ export default class GameController {
     if (game.board[rowNum][colNum] === 'c') {
       if (player.symbol == 'x') {
       update.board[rowNum][colNum] = 'X'
+
       } else if (player.symbol == 'o') {
       update.board[rowNum][colNum] = 'O'
       }
