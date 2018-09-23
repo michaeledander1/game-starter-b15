@@ -40,13 +40,9 @@
   text-align: center;
 }
 
-/* OLD CSS THAT IS PROBABLY NOT IMPORTANT BUT THAT WE KEEP TO BE SURE */
-/* .App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
 
-.App-header {
+/* OLD CSS THAT IS PROBABLY NOT IMPORTANT BUT THAT WE KEEP TO BE SURE */
+/* .App-header {
   background-color: #222;
   height: 150px;
   padding: 20px;
@@ -60,11 +56,7 @@
 .App-intro {
   font-size: large;
 }
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-} */
+*/ 
 
 
 

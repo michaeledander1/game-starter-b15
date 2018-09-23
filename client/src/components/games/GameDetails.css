@@ -17,3 +17,31 @@
 .instructions {
   font-size: 18px;
 }
+
+.grolsch{
+  height: 125px;
+  width: 60px;
+}
+.bigheineken{
+  height: 520px;
+  width: 520px;
+}
+
+a:link {
+  color: green;
+}
+
+/* visited link */
+a:visited {
+  color: green
+}
+
+/* mouse over link */
+a:hover {
+  color: red;
+}
+
+/* selected link */
+a:active {
+  color: rgb(0, 255, 115);
+}
